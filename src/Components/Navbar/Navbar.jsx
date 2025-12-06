@@ -69,7 +69,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=" bg-base-100 shadow-sm">
+      <div className=" bg-base-100 shadow-md sticky top-0 z-50 ">
         <div className="navbar container mx-auto">
           <div className="navbar-start">
             {/* Drawer toggle button */}

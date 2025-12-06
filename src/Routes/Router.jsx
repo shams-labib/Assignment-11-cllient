@@ -8,7 +8,6 @@ import Register from "../Form/Register/Register";
 import Login from "../Form/Login/Login";
 import ProfileCard from "../Pages/Profile/Profile";
 import ServicesPage from "../Pages/Services Page/ServicesPage";
-import ServiceDetailsPage from "../Pages/Services Page/ServiceDetailsPage";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import CreateDecoratorForm from "../Pages/Dashboard/Admin/CreateDecorator/CreateDecoratorForm ";
@@ -16,6 +15,7 @@ import DecoratorList from "../Pages/Dashboard/Admin/DecoratorList/DecoratorList"
 import AllUsers from "../Pages/Dashboard/Admin/All Users/AllUsers";
 import CreateService from "../Pages/Dashboard/Admin/CreateService/CreateService";
 import ServicesDashboardComponent from "../Pages/Dashboard/Admin/ServicesList/ServicesList";
+import ServiceDetailsPage from "../Pages/Services Page/ServiceDetailsPage/ServiceDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
       { path: "/profile", element: <ProfileCard /> },
       { path: "/services", element: <ServicesPage /> },
       {
-        path: "/servicesDetails",
+        path: "/servicesDetails/:id",
         element: (
           <PrivateRoute>
             <ServiceDetailsPage />

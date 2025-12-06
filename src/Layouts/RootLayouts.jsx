@@ -17,7 +17,7 @@ const RootLayouts = () => {
   if (loading) return <Loading></Loading>;
 
   return (
-    <div>
+    <div className="bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="min-h-screen">
         <Outlet />

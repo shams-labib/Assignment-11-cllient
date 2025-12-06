@@ -120,7 +120,7 @@ export default function CreateService() {
             <option value="wedding">Wedding</option>
             <option value="office">Office</option>
             <option value="seminar">Seminar</option>
-            <option value="meeting">Meeting</option>
+            <option value="meeting">Birthday</option>
           </select>
           {errors.category && <p className="text-red-500 text-sm">Required</p>}
         </div>

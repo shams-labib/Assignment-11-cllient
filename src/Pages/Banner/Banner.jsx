@@ -3,8 +3,8 @@ import { Carousel } from "react-responsive-carousel";
 
 const Banner = () => {
   const banners = [
-    "https://i.ibb.co.com/qvsD6jN/toa-heftiba-GHIL2-Yy-Oh-Dg-unsplash.jpg",
     "https://i.ibb.co.com/pv719WZ5/pexels-pixabay-276724.jpg",
+    "https://i.ibb.co.com/qvsD6jN/toa-heftiba-GHIL2-Yy-Oh-Dg-unsplash.jpg",
     "https://i.ibb.co.com/5WD2098G/pexels-emrecan-2079246.jpg",
   ];
 

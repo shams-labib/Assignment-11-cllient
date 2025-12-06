@@ -2,13 +2,13 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-20">
+    <section className="bg-gray-50 dark:bg-gray-900 py-20 rounded-xl md:my-8">
       <div className="container mx-auto px-6 max-w-6xl grid md:grid-cols-2 gap-12 items-center">
         {/* Left Side: Image */}
         <div className="relative">
           <img
-            className="rounded-2xl shadow-xl object-cover w-full h-[400px]"
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+            className="rounded-2xl shadow-xl object-cover w-full md:h-[400px] h-[300px]"
+            src="https://i.ibb.co.com/4wN3xT02/How-to-become-an-interior-decorator-in-post-image-4.jpg"
             alt="Team working"
           />
 
