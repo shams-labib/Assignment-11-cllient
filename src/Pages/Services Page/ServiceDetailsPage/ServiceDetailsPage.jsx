@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Calendar, MapPin, Mail, User } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Mail,
+  User,
+  ShoppingBasket,
+  CircleDollarSign,
+} from "lucide-react";
 import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router";
@@ -134,7 +141,6 @@ const ServiceDetails = () => {
                   <input
                     type="text"
                     value={user?.displayName}
-                    disabled
                     className="w-full bg-transparent outline-none"
                   />
                 </div>
@@ -148,6 +154,31 @@ const ServiceDetails = () => {
                   <input
                     type="email"
                     value={user?.email}
+                    className="w-full bg-transparent outline-none"
+                  />
+                </div>
+              </div>
+              {/* Services Name */}
+              <div className="form-control">
+                <label className="label font-semibold">Services Name</label>
+                <div className="input input-bordered flex items-center gap-2">
+                  <ShoppingBasket size={18} />
+                  <input
+                    type="email"
+                    value={service?.serviceName}
+                    disabled
+                    className="w-full bg-transparent outline-none"
+                  />
+                </div>
+              </div>
+              {/* cost */}
+              <div className="form-control">
+                <label className="label font-semibold">Cost</label>
+                <div className="input input-bordered flex items-center gap-2">
+                  <CircleDollarSign size={18} />
+                  <input
+                    type="email"
+                    value={service?.cost}
                     disabled
                     className="w-full bg-transparent outline-none"
                   />

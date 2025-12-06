@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import Loading from "../../../Loader/Loading";
 
 const MyBookings = () => {
   const axiosSecure = useAxiosSecure();
@@ -84,7 +85,24 @@ const MyBookings = () => {
     });
   };
 
-  if (isLoading) return <p>Loading services...</p>;
+  const handlePayment = async (data) => {
+    const paymentInfo = {
+      cost: data.price,
+      parcelId: data._id,
+      senderEmail: data.userEmail,
+      parcelName: data.serviceName,
+      trackingId: data?.trackingId,
+    };
+
+    const res = await axiosSecure.post(
+      "/payment-checkout-session",
+      paymentInfo
+    );
+    console.log(res.data.url);
+    window.location.assign(res.data.url);
+  };
+
+  if (isLoading) return <Loading></Loading>;
   if (isError) return <p>Error loading services.</p>;
 
   return (
@@ -134,7 +152,10 @@ const MyBookings = () => {
                     </span>
                   </td>
                   <td className="hidden lg:table-cell">
-                    <button className="btn btn-sm bg-green-500 text-white">
+                    <button
+                      onClick={() => handlePayment(s)}
+                      className="btn btn-sm bg-green-500 text-white"
+                    >
                       Pay
                     </button>
                   </td>

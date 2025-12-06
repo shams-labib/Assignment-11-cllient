@@ -17,6 +17,8 @@ import CreateService from "../Pages/Dashboard/Admin/CreateService/CreateService"
 import ServicesDashboardComponent from "../Pages/Dashboard/Admin/ServicesList/ServicesList";
 import ServiceDetailsPage from "../Pages/Services Page/ServiceDetailsPage/ServiceDetailsPage";
 import MyBookings from "../Pages/Dashboard/User/MyProfile/MyBookings";
+import PaymentSuccess from "../Pages/Dashboard/User/PaymentSuccess/PaymentSuccess";
+import PaymentCancel from "../Pages/Dashboard/User/PaymentCancel/PaymentCancel";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +28,6 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
-      { path: "/profile", element: <ProfileCard /> },
       { path: "/services", element: <ServicesPage /> },
       {
         path: "/servicesDetails/:id",
@@ -74,9 +75,12 @@ export const router = createBrowserRouter([
       },
       // User Path
       {
-        path: "my-profile",
+        path: "my-bookings",
         Component: MyBookings,
       },
+      { path: "my-profile", Component: ProfileCard },
+      { path: "payment-success", Component: PaymentSuccess },
+      { path: "payment-cancelled", Component: PaymentCancel },
     ],
   },
 ]);
