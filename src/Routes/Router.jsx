@@ -19,6 +19,7 @@ import ServiceDetailsPage from "../Pages/Services Page/ServiceDetailsPage/Servic
 import MyBookings from "../Pages/Dashboard/User/MyProfile/MyBookings";
 import PaymentSuccess from "../Pages/Dashboard/User/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../Pages/Dashboard/User/PaymentCancel/PaymentCancel";
+import Coverage from "../Pages/Landing/Map/Coverage";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ export const router = createBrowserRouter([
       {
         path: "/servicesDetails/:id",
         element: <ServiceDetailsPage />,
+      },
+      {
+        path: "/coverage",
+        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
+        element: <Coverage></Coverage>,
       },
     ],
   },
