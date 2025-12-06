@@ -1,21 +1,34 @@
 import React from "react";
 import { Outlet } from "react-router";
 import Logo from "../Components/Shared/Logo/Logo";
-import authImg from "../assets/auth.png";
+import logoImg from "../assets/logo.png";
+
 const AuthLayout = () => {
   return (
-    <div className="max-w-7xl mx-auto">
-      <Logo></Logo>
-      <div className="flex flex-col md:flex-row items-center min-h-screen md:my-20">
-        <div className="flex-1 w-full md:w-1/2">
-          <Outlet />
+    <div className="max-w-7xl mx-auto px-4">
+      {/* Top Logo */}
+      <div className="py-6">
+        <Logo />
+      </div>
+
+      <div className="flex flex-col md:flex-row items-center min-h-screen gap-10 md:gap-0">
+        {/* Left: Form Section */}
+        <div className="flex-1 w-full md:w-1/2 flex justify-center">
+          <div className="w-full max-w-md">
+            <Outlet />
+          </div>
         </div>
-        <div className="flex-1 w-full md:w-1/2 hidden md:block">
+
+        {/* Right: Banner Section */}
+        <div className="flex-1 w-full md:w-[450px] hidden md:flex flex-col items-center">
           <img
-            src={authImg}
+            src={logoImg}
             alt="Auth Banner"
-            className="w-full h-full object-cover"
+            className="w-full h-[420px] object-contain drop-shadow-xl"
           />
+          <h1 className="text-4xl font-bold mt-4 text-gray-800 tracking-wide">
+            Style Decor
+          </h1>
         </div>
       </div>
     </div>

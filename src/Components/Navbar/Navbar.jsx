@@ -5,6 +5,7 @@ import CustomNavLink from "../Shared/Custom Navlink/CustomNavlink";
 import Logo from "../Shared/Logo/Logo";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { HiOutlineViewList } from "react-icons/hi";
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -110,31 +111,48 @@ const Navbar = () => {
             {user ? (
               <div className="relative" ref={dropdownRef}>
                 {/* User Image */}
-                <img
-                  src={user.photoURL || "/default-user.png"}
-                  alt={user.displayName || "User"}
-                  className="w-10 h-10 rounded-full cursor-pointer"
+                <div
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                />
+                  className="flex items-center border-blue-500 border px-2 py-1 rounded-full cursor-pointer"
+                >
+                  <img
+                    src={user.photoURL || "/default-user.png"}
+                    alt={user.displayName || "User"}
+                    className="w-10 h-10 rounded-full "
+                  />
+                  <span>
+                    <HiOutlineViewList size={24} />
+                  </span>
+                </div>
 
                 {/* Dropdown */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-50 space-y-2">
-                    <p className="px-4 py-2 text-gray-700 font-semibold">
+                  <div className="absolute right-0 mt-2 w-56 bg-base-100 shadow-xl rounded-2xl py-3 z-50">
+                    <p className="px-4 py-2 text-gray-800 font-semibold text-sm">
                       {user.displayName || "User"}
                     </p>
-                    <hr />
+
+                    <hr className="opacity-30" />
+
                     <Link
-                      to={"/profile"}
-                      className="w-full btn border-none  cursor-pointer text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      to="/profile"
+                      className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition font-medium"
                     >
-                      Profile
+                      👤 <span>Profile</span>
                     </Link>
+
+                    <Link
+                      to="/dashboard"
+                      className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition font-medium"
+                    >
+                      📊 <span>Dashboard</span>
+                    </Link>
+
                     <button
                       onClick={handleSignOut}
-                      className="w-full  btn border-none  cursor-pointer text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                      className="flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition font-medium w-full text-left"
                     >
-                      Log Out
+                      🚪 <span>Log Out</span>
                     </button>
                   </div>
                 )}

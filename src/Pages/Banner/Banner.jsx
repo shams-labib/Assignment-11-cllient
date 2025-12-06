@@ -1,12 +1,12 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
-import banner1 from "../../assets/banner/banner1.png";
-import banner2 from "../../assets/banner/banner2.png";
-import banner3 from "../../assets/banner/banner3.png";
-
 const Banner = () => {
-  const banners = [banner1, banner2, banner3];
+  const banners = [
+    "https://i.ibb.co.com/qvsD6jN/toa-heftiba-GHIL2-Yy-Oh-Dg-unsplash.jpg",
+    "https://i.ibb.co.com/pv719WZ5/pexels-pixabay-276724.jpg",
+    "https://i.ibb.co.com/5WD2098G/pexels-emrecan-2079246.jpg",
+  ];
 
   return (
     <div className="relative w-full">
