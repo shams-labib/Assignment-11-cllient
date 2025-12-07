@@ -19,12 +19,12 @@ const PaymentHistory = () => {
   }
 
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md">
+    <div className="p-6 bg-white rounded-xl shadow-md dark:bg-gray-900">
       <h2 className="text-2xl font-bold mb-4">Payment History</h2>
 
       <div className="overflow-x-auto">
         <table className="table">
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-100 dark:bg-gray-900">
             <tr>
               <th>#</th>
               <th>Parcel Name</th>
