@@ -18,12 +18,13 @@ export default function CreateService() {
     const finalData = {
       ...data,
       cost: parseFloat(data.cost),
+      rating: parseFloat(data.rating),
       createdByEmail: user?.email,
       createdAt: new Date(),
     };
 
     Swal.fire({
-      title: "Are you sure to added this service?",
+      title: "Are you sure to add this service?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -33,15 +34,15 @@ export default function CreateService() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          axiosSecure.post("/services", finalData);
+          await axiosSecure.post("/services", finalData);
           Swal.fire(
-            "Services added!",
-            "Services has been added to the collection.",
+            "Service added!",
+            "Service has been added to the collection.",
             "success"
           );
         } catch (err) {
           console.error(err);
-          Swal.fire("Error!", "Delete failed!", "error");
+          Swal.fire("Error!", "Adding service failed!", "error");
         }
       }
     });
@@ -69,7 +70,7 @@ export default function CreateService() {
             className="input input-bordered w-full outline-none"
             placeholder="Enter service name"
           />
-          {errors.service_name && (
+          {errors.serviceName && (
             <p className="text-red-500 text-sm">Required</p>
           )}
         </div>
@@ -86,6 +87,25 @@ export default function CreateService() {
             placeholder="50000"
           />
           {errors.cost && <p className="text-red-500 text-sm">Required</p>}
+        </div>
+
+        {/* Rating */}
+        <div className="form-control">
+          <label className="label">
+            <span className="font-semibold">Rating</span>
+          </label>
+          <input
+            type="number"
+            step="0.1"
+            min="0"
+            max="5"
+            {...register("rating", { required: true, min: 0, max: 5 })}
+            className="input input-bordered w-full outline-none"
+            placeholder="Enter rating (0-5)"
+          />
+          {errors.rating && (
+            <p className="text-red-500 text-sm">Rating is required (0-5)</p>
+          )}
         </div>
 
         {/* Unit */}
@@ -125,6 +145,7 @@ export default function CreateService() {
           {errors.category && <p className="text-red-500 text-sm">Required</p>}
         </div>
 
+        {/* Services Image */}
         <div className="form-control md:col-span-2">
           <label className="label">
             <span className="font-semibold">Services Image</span>
@@ -135,10 +156,10 @@ export default function CreateService() {
             className="input input-bordered w-full outline-none"
             placeholder="Services photo"
           />
-          {errors.cost && <p className="text-red-500 text-sm">Required</p>}
+          {errors.image && <p className="text-red-500 text-sm">Required</p>}
         </div>
 
-        {/* Description (full width) */}
+        {/* Description */}
         <div className="form-control md:col-span-2">
           <label className="label">
             <span className="font-semibold">Description</span>

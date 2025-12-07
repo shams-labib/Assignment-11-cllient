@@ -22,6 +22,7 @@ const ManageBookings = () => {
       const res = await axiosSecure.get(
         `/users?status=approved&role=decorator`
       );
+
       return res.data;
     },
   });
