@@ -7,28 +7,25 @@ import Loading from "../../../Loader/Loading";
 
 const MyBookings = () => {
   const axiosSecure = useAxiosSecure();
+  const [services, setServices] = useState([]);
 
-  const {
-    data: products = [],
-    isLoading,
-    isError,
-  } = useQuery({
+  const { isLoading, isError } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
       const res = await axiosSecure.get("/bookings");
+      setServices(res.data);
       return res.data;
     },
   });
 
-  const [services, setServices] = useState([]);
   const [selected, setSelected] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const { register, handleSubmit, reset } = useForm();
 
-  useEffect(() => {
-    setServices(products);
-  }, [products]);
+  // useEffect(() => {
+  //   setServices(products);
+  // }, [products]);
 
   // Modal fields properly prefill
   useEffect(() => {
@@ -54,7 +51,20 @@ const MyBookings = () => {
   }
 
   const onSubmit = (data) => {
-    axiosSecure.patch(`/bookings/${selected._id}`, data);
+    axiosSecure
+      .patch(`/bookings/${selected._id}`, data)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Services Updated Successfully!",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
 
     setServices((prev) =>
       prev.map((s) => (s._id === selected._id ? { ...s, ...data } : s))
@@ -152,12 +162,16 @@ const MyBookings = () => {
                     </span>
                   </td>
                   <td className="hidden lg:table-cell">
-                    <button
-                      onClick={() => handlePayment(s)}
-                      className="btn btn-sm bg-green-500 text-white"
-                    >
-                      Pay
-                    </button>
+                    {s.paymentStatus === "paid" ? (
+                      <span className="text-green-500">Paid</span>
+                    ) : (
+                      <button
+                        onClick={() => handlePayment(s)}
+                        className="btn btn-primary btn-sm text-white font-semibold"
+                      >
+                        Pay
+                      </button>
+                    )}
                   </td>
                   <td className="flex items-center justify-center gap-2">
                     <button

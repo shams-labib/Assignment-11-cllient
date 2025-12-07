@@ -9,12 +9,12 @@ import { BsCart4 } from "react-icons/bs";
 
 const DashboardLayout = () => {
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open dark:bg-gray-900">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       {/* Main content */}
-      <div className="drawer-content flex flex-col min-h-screen bg-gray-50">
+      <div className="drawer-content flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Navbar */}
-        <nav className="navbar bg-white shadow-md px-4 py-3 sticky top-0 z-50">
+        <nav className="navbar bg-white shadow-md px-4 py-3 sticky top-0 z-50 dark:bg-gray-900">
           <label
             htmlFor="my-drawer-4"
             className="btn btn-square btn-ghost lg:hidden"
@@ -34,19 +34,19 @@ const DashboardLayout = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="text-xl font-bold text-primary ml-2">Dashboard</div>
+          <div className="text-xl font-bold text-primary ml-2 ">Dashboard</div>
         </nav>
 
         {/* Page content */}
-        <div className="p-6">
+        <div className="p-6 ">
           <Outlet />
         </div>
       </div>
 
       {/* Sidebar */}
-      <div className="drawer-side">
+      <div className="drawer-side ">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
-        <div className="flex min-h-full flex-col w-64 bg-white shadow-md">
+        <div className="flex min-h-full flex-col w-64 bg-white shadow-md dark:bg-gray-900">
           {/* Logo */}
           <div className="flex items-center justify-center py-6 border-b">
             <img src={logoImg} className="w-20 rounded-full" alt="Logo" />
@@ -94,7 +94,33 @@ const DashboardLayout = () => {
                 My Bookings
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/dashboard/payment-history"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
+              >
+                <Album size={22} />
+                Payment History
+              </NavLink>
+            </li>
             {/* admin */}
+            <li>
+              <NavLink
+                to="/dashboard/manage-bookings"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors hover:bg-primary/10 ${
+                    isActive ? "bg-primary/20 text-primary font-semibold" : ""
+                  }`
+                }
+              >
+                <FiUserPlus size={22} />
+                Manage Bookings
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="/dashboard/create-decorator"

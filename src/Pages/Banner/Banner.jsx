@@ -33,8 +33,8 @@ const Banner = () => {
               <p className="text-white text-sm sm:text-base md:text-lg mb-4 max-w-md">
                 Some catchy subtitle or description goes here.
               </p>
-              <button className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm sm:text-base">
-                Order Now
+              <button className="px-6 py-2 bg-primary cursor-pointer text-white rounded hover:bg-blue-700 transition text-sm sm:text-base">
+                Book Decoration Service
               </button>
             </div>
           </div>

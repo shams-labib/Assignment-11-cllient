@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 const ServicesDashboardComponent = () => {
   const axiosSecure = useAxiosSecure();
+  const [services, setServices] = useState([]);
 
   const {
     data: products = [],
@@ -15,19 +16,19 @@ const ServicesDashboardComponent = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosSecure.get("/services");
+      setServices(res.data);
       return res.data;
     },
   });
 
-  const [services, setServices] = useState([]);
   const [selected, setSelected] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const { register, handleSubmit, reset } = useForm();
 
-  useEffect(() => {
-    setServices(products);
-  }, [products]);
+  // useEffect(() => {
+  //   setServices(products);
+  // }, [products]);
 
   useEffect(() => {
     if (selected) {

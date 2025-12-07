@@ -1,26 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useState } from "react";
 
 export default function DecoratorList() {
   const axiosSecure = useAxiosSecure();
+  const [decorators, setDecorators] = useState([]);
 
   // Fetch decorators
   const { data: initialDecorators = [], refetch } = useQuery({
     queryKey: ["users", "decorators"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users?role=decorator");
+      setDecorators(res.data);
       return res.data;
     },
   });
 
-  const [decorators, setDecorators] = useState([]);
-
-  useEffect(() => {
-    setDecorators(initialDecorators);
-  }, [initialDecorators]);
+  // useEffect(() => {
+  //   setDecorators(initialDecorators);
+  // }, [initialDecorators]);
 
   const [selected, setSelected] = useState(null);
 

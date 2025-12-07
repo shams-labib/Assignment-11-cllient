@@ -20,6 +20,8 @@ import MyBookings from "../Pages/Dashboard/User/MyProfile/MyBookings";
 import PaymentSuccess from "../Pages/Dashboard/User/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../Pages/Dashboard/User/PaymentCancel/PaymentCancel";
 import Coverage from "../Pages/Landing/Map/Coverage";
+import PaymentHistory from "../Pages/Dashboard/User/PaymentHistory/PaymentHistory";
+import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings/ManageBookings";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +89,8 @@ export const router = createBrowserRouter([
       { path: "my-profile", Component: ProfileCard },
       { path: "payment-success", Component: PaymentSuccess },
       { path: "payment-cancelled", Component: PaymentCancel },
+      { path: "payment-history", Component: PaymentHistory },
+      { path: "manage-bookings", Component: ManageBookings },
     ],
   },
 ]);
