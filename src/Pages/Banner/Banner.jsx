@@ -15,7 +15,6 @@ import {
   CircleDollarSign,
 } from "lucide-react";
 import { useState } from "react";
-import Loading from "../Loader/Loading";
 
 const iconAnim = {
   hover: {
