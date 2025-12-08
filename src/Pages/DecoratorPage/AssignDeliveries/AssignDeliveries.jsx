@@ -83,9 +83,9 @@ const AssignDeliveries = () => {
                 <td className="font-mono">{parcel.trackingId}</td>
 
                 <td>
-                  {/* <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
+                  <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
                     {parcel.category}
-                  </span> */}
+                  </span>
                 </td>
 
                 <td>{parcel.location}</td>
