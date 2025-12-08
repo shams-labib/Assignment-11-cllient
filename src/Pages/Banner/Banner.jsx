@@ -15,6 +15,7 @@ import {
   CircleDollarSign,
 } from "lucide-react";
 import { useState } from "react";
+import Loading from "../Loader/Loading";
 
 const iconAnim = {
   hover: {
@@ -43,13 +44,17 @@ const Banner = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
-  const { data: banners = [] } = useQuery({
+  const { data: banners = [], isLoading } = useQuery({
     queryKey: ["banner"],
     queryFn: async () => {
       const res = await axiosSecure.get("/banner");
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   const handleBookSubmit = (data) => {
     const bookingInfo = {
