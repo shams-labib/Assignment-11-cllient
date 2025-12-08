@@ -33,24 +33,6 @@ const Register = () => {
 
         // decoder data added
 
-        const decorInfo = {
-          name: data.name,
-          email: data.email,
-          address: data.address,
-          experience: data.experience,
-          role: "user",
-          status: "",
-        };
-
-        axiosSecure
-          .post(`/users?email=${data?.email}`, decorInfo)
-          .then(() => {
-            console.log("Data added success");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
         const image_API_URL = `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_img_host
         }`;
@@ -63,13 +45,30 @@ const Register = () => {
             photoURL: photoURL,
           };
 
+          const decorInfo = {
+            name: data.name,
+            email: data.email,
+            address: data.address,
+            experience: data.experience,
+            role: "user",
+            photoURL: photoURL,
+          };
+
+          axiosSecure
+            .post(`/users?email=${data?.email}`, decorInfo)
+            .then(() => {
+              console.log("Data added success");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
           updateUserProfile(userProfileUpdate)
             .then(() => {
               navigate(location?.state || "/");
             })
             .catch((err) => console.log(err));
         });
-
         navigate("/");
         Swal.fire({
           title: "Account Login Success!",

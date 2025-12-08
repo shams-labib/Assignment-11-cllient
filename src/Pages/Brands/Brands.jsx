@@ -1,9 +1,8 @@
 import React from "react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 import amazon from "../../assets/brands/amazon.png";
 import amazonVector from "../../assets/brands/amazon_vector.png";
@@ -29,7 +28,7 @@ const Brands = () => {
       {/* Section Title */}
       <div className="text-center mb-10">
         <h2 className="text-xl sm:text-4xl font-bold text-gray-800 dark:text-white">
-          We Work With
+          We Are Works With
         </h2>
         <p className="text-gray-500 dark:text-gray-300 mt-2 text-sm sm:text-base">
           Trusted by top brands across industries
@@ -45,11 +44,7 @@ const Brands = () => {
           delay: 1500,
           disableOnInteraction: false,
         }}
-        pagination={{
-          clickable: true,
-          dynamicBullets: true, // dynamic spacing
-        }}
-        modules={[Autoplay, Pagination]}
+        modules={[Autoplay]}
         breakpoints={{
           640: { slidesPerView: 2 },
           768: { slidesPerView: 3 },

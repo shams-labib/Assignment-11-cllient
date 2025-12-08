@@ -2,9 +2,9 @@ import React from "react";
 import { PhoneCall, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 
-const Contact = () => {
+const ContactUsPage = () => {
   return (
-    <section className="relative  dark:bg-gray-900 py-20 px-6 overflow-hidden">
+    <section className="relative  dark:bg-gray-900 py-20 px-6 overflow-hidden flex flex-col items-center justify-center min-h-screen">
       {/* Background Glow */}
       <div className="absolute inset-0 pointer-events-none"></div>
 
@@ -88,4 +88,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactUsPage;

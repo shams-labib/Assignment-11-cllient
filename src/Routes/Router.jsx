@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router"; // ensure react-router-dom
 import RootLayouts from "../Layouts/RootLayouts";
 import Error from "../Pages/Error/Error";
 import Home from "../Pages/Landing/Home/Home";
-import About from "../Pages/Landing/About/About";
+
 import AuthLayout from "../Layouts/AuthLayout";
 import Register from "../Form/Register/Register";
 import Login from "../Form/Login/Login";
@@ -19,12 +19,15 @@ import ServiceDetailsPage from "../Pages/Services Page/ServiceDetailsPage/Servic
 import MyBookings from "../Pages/Dashboard/User/MyProfile/MyBookings";
 import PaymentSuccess from "../Pages/Dashboard/User/PaymentSuccess/PaymentSuccess";
 import PaymentCancel from "../Pages/Dashboard/User/PaymentCancel/PaymentCancel";
-import Coverage from "../Pages/Landing/Map/Coverage";
+
 import PaymentHistory from "../Pages/Dashboard/User/PaymentHistory/PaymentHistory";
 import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings/ManageBookings";
 import AssignDeliveries from "../Pages/DecoratorPage/AssignDeliveries/AssignDeliveries";
 import Todayshedule from "../Pages/DecoratorPage/Todayshedule/Todayshedule";
 import EarningSummary from "../Pages/DecoratorPage/Earning Summary/EarningSummary";
+
+import AboutUsPage from "../Pages/AboutUs/AboutPage";
+import ContactUsPage from "../Pages/Contact/ContactUsPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,16 +36,20 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
       { path: "/services", element: <ServicesPage /> },
       {
         path: "/servicesDetails/:id",
         element: <ServiceDetailsPage />,
       },
       {
-        path: "/coverage",
-        loader: () => fetch("/serviceCenter.json").then((res) => res.json()),
-        element: <Coverage></Coverage>,
+        path: "/contact",
+
+        element: <ContactUsPage></ContactUsPage>,
+      },
+      {
+        path: "/about",
+
+        element: <AboutUsPage></AboutUsPage>,
       },
     ],
   },

@@ -21,7 +21,7 @@ const TopCard = () => {
   const topServices = services.slice(0, 8);
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-12">
+    <section className="bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         {/* Section Title */}
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-gray-100 mb-10 flex items-center justify-center gap-3">

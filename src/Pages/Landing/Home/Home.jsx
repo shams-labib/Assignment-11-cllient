@@ -7,20 +7,44 @@ import WhyChooseAndContact from "../../WhyChooseUs/WhyChooseAndContact";
 import Contact from "../../Contact/Contact";
 import TopCard from "../../Services Page/TopCard";
 import TopDecorator from "../../Top Decorators/TopDecorator";
+import Coverage from "../Map/Coverage";
 
 const reviewPromise = fetch("/reviews.json").then((res) => res.json());
+const coveragePromise = fetch("/serviceCenter.json").then((res) => res.json());
 
 const Home = () => {
   return (
-    <div>
-      <Banner></Banner>
-      <TopCard></TopCard>
-      <TopDecorator></TopDecorator>
-      <AboutUs></AboutUs>
-      <WhyChooseAndContact></WhyChooseAndContact>
-      <Reviews reviewPromise={reviewPromise}></Reviews>
-      <Brands></Brands>
-      <Contact></Contact>
+    <div className="space-y-24">
+      <Banner />
+      <Coverage coveragePromise={coveragePromise} />
+
+      <section className="container mx-auto bg-gray-50">
+        <TopCard />
+      </section>
+
+      <section className="container mx-auto">
+        <TopDecorator />
+      </section>
+
+      <section className="bg-gray-50 ">
+        <AboutUs />
+      </section>
+
+      <section className="">
+        <WhyChooseAndContact />
+      </section>
+
+      <section className="container mx-auto">
+        <Reviews reviewPromise={reviewPromise} />
+      </section>
+
+      <section className="container mx-auto">
+        <Brands />
+      </section>
+
+      <section className="">
+        <Contact />
+      </section>
     </div>
   );
 };

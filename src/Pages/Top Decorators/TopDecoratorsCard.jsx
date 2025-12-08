@@ -1,64 +1,82 @@
 import React from "react";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import {
+  FaUserTie,
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaCheckCircle,
+} from "react-icons/fa";
 
-const TopDecoratorsCard = ({ decorator }) => {
-  // Experience rating: 1 star per year of experience, max 5 stars
-  const experience = Number(decorator.experience);
-  const fullStars = Math.min(experience, 5);
-  const emptyStars = 5 - fullStars;
+const DecoratorCard = ({ decorator }) => {
+  const { name, email, address, experience, status } = decorator;
 
   return (
-    <div className="max-w-xs bg-white rounded-2xl shadow-md p-5 flex flex-col items-center text-center hover:shadow-xl transition-shadow duration-300">
-      {/* Profile */}
-      <div className="w-24 h-24 rounded-full overflow-hidden mb-3">
-        <img
-          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-            decorator.name
-          )}&background=random`}
-          alt={decorator.name}
-          className="w-full h-full object-cover"
-        />
+    <div
+      className="
+        relative p-6 rounded-2xl shadow-lg border 
+        bg-white/80 dark:bg-gray-800/80 
+        backdrop-blur-sm 
+        hover:shadow-2xl hover:-translate-y-1 
+        transition-all duration-300
+        border-gray-200 dark:border-gray-700
+      "
+    >
+      {/* Gradient Glow Border */}
+      <div className="absolute inset-0 rounded-2xl -z-10 opacity-20 blur-xl"></div>
+
+      {/* Top Section */}
+      <div className="flex justify-between items-center mb-4">
+        <span className="px-3 py-1 text-sm font-semibold rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+          ⭐ {experience} Ratings
+        </span>
+
+        <span
+          className={`px-3 py-1 text-xs font-bold rounded-full flex items-center gap-1 shadow-sm ${
+            status === "approved"
+              ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200"
+              : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-200"
+          }`}
+        >
+          <FaCheckCircle size={12} />
+          {status}
+        </span>
+      </div>
+
+      {/* Profile Icon with Glass Circle */}
+      <div className="flex justify-center mb-4">
+        <div
+          className="
+          p-4 rounded-full 
+          bg-white/40 dark:bg-gray-700/40 
+          backdrop-blur-md 
+          border border-gray-200 dark:border-gray-600
+          shadow-inner
+        "
+        >
+          <FaUserTie className="text-5xl text-gray-700 dark:text-gray-200" />
+        </div>
       </div>
 
       {/* Name */}
-      <h3 className="text-lg font-semibold mb-1">{decorator.name}</h3>
+      <h2 className="text-xl font-bold text-center text-gray-900 dark:text-white">
+        {name}
+      </h2>
 
-      {/* Specialist */}
-      <p className="text-sm text-gray-500 mb-2">Decoration Expert</p>
+      {/* Subtitle */}
+      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+        Decoration Specialist
+      </p>
 
-      {/* Experience / Ratings */}
-      <div className="flex items-center mb-2">
-        {[...Array(fullStars)].map((_, i) => (
-          <FaStar key={i} className="text-yellow-400 mr-1" />
-        ))}
-        {[...Array(emptyStars)].map((_, i) => (
-          <FaRegStar key={i} className="text-gray-300 mr-1" />
-        ))}
-      </div>
+      {/* Email */}
+      <p className="flex items-center justify-center gap-2 text-gray-700 dark:text-gray-300 mt-1">
+        <FaEnvelope className="text-sm" /> {email}
+      </p>
 
-      {/* Email / Address */}
-      <p className="text-sm text-gray-600">{decorator.email}</p>
-      <p className="text-sm text-gray-600">{decorator.address}</p>
+      {/* Address */}
+      <p className="flex items-center justify-center gap-2 text-gray-700 dark:text-gray-300 mt-1">
+        <FaMapMarkerAlt className="text-sm" /> {address}
+      </p>
     </div>
   );
 };
 
-// Demo usage
-const demoDecorator = {
-  name: "মতলব মিয়া",
-  email: "user8@gmail.com",
-  address: "rangpur",
-  experience: "6",
-  role: "decorator",
-  status: "approved",
-};
-
-const TopDecorators = () => {
-  return (
-    <div className="flex flex-wrap gap-6 justify-center mt-6">
-      <TopDecoratorCard decorator={demoDecorator} />
-    </div>
-  );
-};
-
-export default TopDecoratorsCard;
+export default DecoratorCard;

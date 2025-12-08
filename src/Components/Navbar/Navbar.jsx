@@ -86,19 +86,6 @@ const Navbar = () => {
       </li>
 
       <li>
-        <CustomNavLink to="/coverage">
-          <motion.div
-            className="flex items-center gap-2"
-            whileHover={{ x: 3, scale: 1.05 }}
-            transition={{ type: "tween" }}
-          >
-            <MapPinned size={18} />
-            <span>Coverage</span>
-          </motion.div>
-        </CustomNavLink>
-      </li>
-
-      <li>
         <CustomNavLink to="/contact">
           <motion.div
             className="flex items-center gap-2"

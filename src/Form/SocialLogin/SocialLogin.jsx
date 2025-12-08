@@ -3,9 +3,11 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import Loading from "../../Pages/Loader/Loading";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { googleLogin, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
   if (loading) {
@@ -13,14 +15,23 @@ const SocialLogin = () => {
   }
 
   const handleGoogleLogin = () => {
-    googleLogin().then(() => {
-      navigate("/");
-      Swal.fire({
-        title: "Gmail Account Login Success!",
-        text: "Now you can access this website",
-        icon: "success",
-      });
-    });
+    googleLogin()
+      .then((result) => {
+        console.log(result.user);
+
+        const userInfo = {
+          email: result.user.email,
+          name: result.user.displayName,
+          photoURL: result.user.photoURL,
+          experience: 4.5,
+        };
+
+        axiosSecure.post("/users", userInfo).then((res) => {
+          console.log("user data has been stored", res.data);
+          navigate(location?.state || "/");
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
