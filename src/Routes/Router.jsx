@@ -24,6 +24,7 @@ import PaymentHistory from "../Pages/Dashboard/User/PaymentHistory/PaymentHistor
 import ManageBookings from "../Pages/Dashboard/Admin/ManageBookings/ManageBookings";
 import AssignDeliveries from "../Pages/DecoratorPage/AssignDeliveries/AssignDeliveries";
 import Todayshedule from "../Pages/DecoratorPage/Todayshedule/Todayshedule";
+import EarningSummary from "../Pages/DecoratorPage/Earning Summary/EarningSummary";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,7 @@ export const router = createBrowserRouter([
       { path: "manage-bookings", Component: ManageBookings },
       { path: "assigned-deliveries", Component: AssignDeliveries },
       { path: "today-shedule", Component: Todayshedule },
+      { path: "earings-summary", Component: EarningSummary },
     ],
   },
 ]);

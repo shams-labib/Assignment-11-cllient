@@ -1,11 +1,10 @@
-import React, { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAuth from "../../../Hooks/useAuth";
+import { PackageCheck, Boxes } from "lucide-react";
 
 const AssignDeliveries = () => {
-  const [acceptedIds, setAcceptedIds] = useState([]);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const { data: parcels = [], refetch } = useQuery({
@@ -19,13 +18,9 @@ const AssignDeliveries = () => {
   });
 
   const handleDeliveryStatusUpdate = (parcel, status) => {
-    const statusInfo = {
-      deliveryStatus: status,
-    };
+    const statusInfo = { deliveryStatus: status };
 
-    let massage = `Parcel status is updated with ${status
-      .split("-")
-      .join(" ")}`;
+    let message = `Parcel status updated to ${status.split("-").join(" ")}`;
 
     axiosSecure
       .patch(`/bookings/${parcel._id}/status`, statusInfo)
@@ -33,81 +28,73 @@ const AssignDeliveries = () => {
         if (res.data.modifiedCount) {
           refetch();
           Swal.fire({
-            position: "top-center",
-            showConfirmButton: false,
-            timer: 2000,
-            text: massage,
+            title: "Success!",
+            text: message,
             icon: "success",
+            timer: 1800,
+            showConfirmButton: false,
+            position: "top",
+            toast: true,
           });
         }
       });
   };
 
   return (
-    <div>
-      <h2 className="text-4xl font-semibold mb-6">
-        Parcels Pickup : {parcels.length}
-      </h2>
+    <div className="p-4">
+      {/* Title */}
+      <div className="flex justify-center items-center gap-3 mb-6">
+        <Boxes className="w-10 h-10 text-blue-600" />
+        <h2 className="text-4xl font-bold text-center">
+          Assigned Parcels ({parcels.length})
+        </h2>
+      </div>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra table-hover w-full border border-gray-200 dark:border-gray-700">
-          {/* Table Head */}
-          <thead className="bg-gray-100 dark:bg-gray-800">
+      <div className="overflow-x-auto rounded-xl shadow-md border border-gray-200">
+        <table className="table table-zebra w-full">
+          <thead className="bg-gray-100 text-gray-700 text-base">
             <tr>
               <th>#</th>
               <th>Parcel</th>
               <th>Tracking ID</th>
               <th>Category</th>
               <th>Location</th>
-              <th>Cost (BDT)</th>
-              <th>Status / Confirm</th>
-              <th>Actions</th>
+              <th>Cost</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
 
-          {/* Table Body */}
           <tbody>
             {parcels.map((parcel, index) => (
-              <tr
-                key={parcel._id}
-                className="hover:bg-gray-50 dark:hover:bg-gray-700"
-              >
+              <tr key={parcel._id}>
                 <th>{index + 1}</th>
 
-                {/* Parcel Info with Image */}
-                <td className="flex items-center gap-2">
+                {/* Image + parcel name */}
+                <td className="flex items-center gap-3">
                   <img
                     src={parcel.image || "/default-image.png"}
                     alt={parcel.parcelName}
-                    className="w-12 h-12 object-cover rounded-lg border"
+                    className="w-12 h-12 rounded-xl object-cover border"
                   />
-                  <span>{parcel.decoratorName}</span>
+                  <span className="font-semibold">{parcel.decoratorName}</span>
                 </td>
 
-                {/* Tracking ID */}
-                <td className="font-mono text-sm">{parcel.trackingId}</td>
+                <td className="font-mono">{parcel.trackingId}</td>
 
-                {/* Category */}
                 <td>
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                  <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
                     {parcel.category}
                   </span>
                 </td>
 
-                {/* Location */}
                 <td>{parcel.location}</td>
-
-                {/* Cost */}
-                <td className="font-semibold">
-                  {/* {parcel.cost.toLocaleString()} */}
-                  {parcel.price}
-                </td>
+                <td className="font-bold">{parcel.price}</td>
 
                 {/* Status / Confirm */}
                 <td>
                   {parcel.deliveryStatus === "materials-prepared" ? (
                     <>
-                      {" "}
                       <button
                         onClick={() =>
                           handleDeliveryStatusUpdate(
@@ -115,35 +102,51 @@ const AssignDeliveries = () => {
                             "on-the-way-to-venue"
                           )
                         }
-                        className="btn btn-primary "
+                        className="btn btn-sm bg-blue-600 text-white"
                       >
                         Accept
                       </button>
-                      <button className="btn btn-warning  ms-2">Reject</button>
+                      <button className="btn btn-sm bg-yellow-400 ms-2">
+                        Reject
+                      </button>
                     </>
                   ) : (
-                    <span>Accepted</span>
+                    <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full">
+                      {parcel.deliveryStatus}
+                    </span>
                   )}
                 </td>
 
                 {/* Actions */}
                 <td>
-                  <button
-                    onClick={() =>
-                      handleDeliveryStatusUpdate(parcel, "setup-in-progress")
-                    }
-                    className="btn btn-primary "
-                  >
-                    Mark as process
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleDeliveryStatusUpdate(parcel, "Completed")
-                    }
-                    className="btn btn-primary  mx-2"
-                  >
-                    Mark as completed
-                  </button>
+                  {parcel.deliveryStatus === "on-the-way-to-venue" && (
+                    <button
+                      onClick={() =>
+                        handleDeliveryStatusUpdate(parcel, "setup-in-progress")
+                      }
+                      className="btn btn-primary btn-sm"
+                    >
+                      Mark In-Process
+                    </button>
+                  )}
+
+                  {parcel.deliveryStatus === "setup-in-progress" && (
+                    <button
+                      onClick={() =>
+                        handleDeliveryStatusUpdate(parcel, "Completed")
+                      }
+                      className="btn btn-success btn-sm"
+                    >
+                      Mark Completed
+                    </button>
+                  )}
+
+                  {parcel.deliveryStatus === "Completed" && (
+                    <button className="btn btn-sm bg-green-300 rounded-lg">
+                      <PackageCheck className="w-4 h-4 inline me-1" />
+                      Done
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

@@ -6,6 +6,7 @@ import AboutUs from "../../AboutUs/AboutUs";
 import WhyChooseAndContact from "../../WhyChooseUs/WhyChooseAndContact";
 import Contact from "../../Contact/Contact";
 import TopCard from "../../Services Page/TopCard";
+import TopDecorator from "../../Top Decorators/TopDecorator";
 
 const reviewPromise = fetch("/reviews.json").then((res) => res.json());
 
@@ -14,6 +15,7 @@ const Home = () => {
     <div>
       <Banner></Banner>
       <TopCard></TopCard>
+      <TopDecorator></TopDecorator>
       <AboutUs></AboutUs>
       <WhyChooseAndContact></WhyChooseAndContact>
       <Reviews reviewPromise={reviewPromise}></Reviews>
