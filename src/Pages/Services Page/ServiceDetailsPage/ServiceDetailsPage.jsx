@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import {
   Calendar,
   MapPin,
-  Mail,
   User,
+  Mail,
   ShoppingBasket,
   CircleDollarSign,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import useAuth from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router";
-import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../Loader/Loading";
 
 const iconAnim = {
@@ -24,13 +24,12 @@ const iconAnim = {
   },
 };
 
-const ServiceDetails = () => {
+const Banner = () => {
   const { user } = useAuth();
   const [openModal, setOpenModal] = useState(false);
-
-  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -55,7 +54,7 @@ const ServiceDetails = () => {
       price: service.cost,
       userName: user?.displayName,
       userEmail: user?.email,
-      date: new Date(),
+      bookingDate: data.bookingDate,
       location: data.location,
       category: service.category,
       image: service.image,
@@ -80,10 +79,7 @@ const ServiceDetails = () => {
       setOpenModal(true);
     } else {
       navigate("/login");
-      Swal.fire({
-        icon: "error",
-        title: "Please login first",
-      });
+      Swal.fire({ icon: "error", title: "Please login first" });
     }
   };
 
@@ -113,22 +109,18 @@ const ServiceDetails = () => {
           <h2 className="card-title text-3xl font-bold tracking-wide">
             {service?.serviceName}
           </h2>
-
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
             {service?.description}
           </p>
-
           <div className="mt-4 space-y-1">
             <p className="font-semibold">
               Category:{" "}
               <span className="text-primary">{service?.category}</span>
             </p>
-
             <p className="font-semibold text-xl text-green-600">
               Price: {service?.cost} BDT / {service?.unit}
             </p>
           </div>
-
           <div className="card-actions mt-6">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -162,7 +154,6 @@ const ServiceDetails = () => {
               onSubmit={handleSubmit(handleBookSubmit)}
               className="space-y-4"
             >
-              {/* FIELD COMPONENT */}
               {[
                 {
                   label: "Your Name",
@@ -242,7 +233,6 @@ const ServiceDetails = () => {
                 )}
               </div>
 
-              {/* Submit */}
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 className="btn btn-primary w-full shadow-lg"
@@ -268,4 +258,4 @@ const ServiceDetails = () => {
   );
 };
 
-export default ServiceDetails;
+export default Banner;
