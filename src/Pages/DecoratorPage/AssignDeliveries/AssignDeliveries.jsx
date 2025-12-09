@@ -13,7 +13,7 @@ const AssignDeliveries = () => {
       const res = await axiosSecure.get(
         `/bookings?decoratorEmail=${user?.email}`
       );
-      return res.data;
+      return res.data.data;
     },
   });
 

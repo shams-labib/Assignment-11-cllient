@@ -97,18 +97,6 @@ const Navbar = () => {
           </motion.div>
         </CustomNavLink>
       </li>
-      <li>
-        <CustomNavLink to="/coverage">
-          <motion.div
-            className="flex items-center gap-2"
-            whileHover={{ y: -3 }}
-            transition={{ type: "spring", stiffness: 250 }}
-          >
-            <Phone size={18} />
-            <span>Contact</span>
-          </motion.div>
-        </CustomNavLink>
-      </li>
 
       {user && (
         <li>

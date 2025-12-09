@@ -14,7 +14,7 @@ const EarningSummary = () => {
       const res = await axiosSecure.get(
         `/bookings?decoratorEmail=${user?.email}&deliveryStatus=Completed`
       );
-      return res.data;
+      return res.data.data;
     },
   });
 

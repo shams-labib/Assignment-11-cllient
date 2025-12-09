@@ -11,7 +11,7 @@ const ManageBookings = () => {
     queryKey: ["bookings", "planning-phase"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/bookings`);
-      return res.data;
+      return res.data.data;
     },
   });
 

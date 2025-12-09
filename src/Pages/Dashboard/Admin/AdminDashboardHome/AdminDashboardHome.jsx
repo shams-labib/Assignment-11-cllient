@@ -20,7 +20,7 @@ const AdminDashboardHome = () => {
   // Fetch data
   const { data: bookingsData = [] } = useQuery({
     queryKey: ["bookings"],
-    queryFn: async () => (await axiosSecure.get("/bookings")).data,
+    queryFn: async () => (await axiosSecure.get("/bookings")).data.data,
   });
 
   const { data: usersData = [] } = useQuery({
