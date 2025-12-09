@@ -60,6 +60,11 @@ const ServicesDashboardComponent = () => {
       prev.map((s) => (s._id === selected._id ? { ...s, ...data } : s))
     );
     closeModal();
+    Swal.fire({
+      title: "Data updated",
+      text: "Services updated success ",
+      icon: "success",
+    });
   };
 
   const handleDelete = (service) => {

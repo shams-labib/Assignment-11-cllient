@@ -1,3 +1,4 @@
+// Updated MyBookings.jsx with sorting by date and status
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
@@ -10,6 +11,10 @@ const MyBookings = () => {
   const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
   const { user } = useAuth();
+
+  // Sorting states
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   const { isLoading, isError } = useQuery({
     queryKey: ["bookings"],
@@ -25,11 +30,7 @@ const MyBookings = () => {
 
   const { register, handleSubmit, reset } = useForm();
 
-  // useEffect(() => {
-  //   setServices(products);
-  // }, [products]);
-
-  // Modal fields properly prefill
+  // Prefill modal
   useEffect(() => {
     if (selected) {
       reset({
@@ -41,6 +42,33 @@ const MyBookings = () => {
       });
     }
   }, [selected, reset]);
+
+  // Sorting function using bookingsDate and deliveryStatus
+  const sortServices = (data) => {
+    let sorted = [...data];
+
+    if (sortBy === "date") {
+      sorted.sort((a, b) => {
+        const d1 = new Date(a.bookingsDate);
+        const d2 = new Date(b.bookingsDate);
+        return sortOrder === "asc" ? d1 - d2 : d2 - d1;
+      });
+    }
+
+    if (sortBy === "status") {
+      sorted.sort((a, b) => {
+        const s1 = a.deliveryStatus?.toLowerCase() || "";
+        const s2 = b.deliveryStatus?.toLowerCase() || "";
+        return sortOrder === "asc"
+          ? s1.localeCompare(s2)
+          : s2.localeCompare(s1);
+      });
+    }
+
+    return sorted;
+  };
+
+  const sortedServices = sortServices(services);
 
   function openEditModal(service) {
     setSelected(service);
@@ -110,16 +138,35 @@ const MyBookings = () => {
       "/payment-checkout-session",
       paymentInfo
     );
-    console.log(res.data.url);
     window.location.assign(res.data.url);
   };
 
-  if (isLoading) return <Loading></Loading>;
+  if (isLoading) return <Loading />;
   if (isError) return <p>Error loading services.</p>;
 
   return (
     <div className="p-4 max-w-full dark:bg-gray-900">
       <h2 className="text-2xl font-semibold mb-4">My Bookings</h2>
+
+      <div className="flex items-center gap-3 mb-4">
+        <select
+          className="select select-bordered outline-none cursor-pointer"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="date">Sort by Date</option>
+          <option value="status">Sort by Status</option>
+        </select>
+
+        <select
+          className="select select-bordered cursor-pointer outline-none"
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
 
       <div className="bg-base-100 shadow-md rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
@@ -136,7 +183,7 @@ const MyBookings = () => {
               </tr>
             </thead>
             <tbody>
-              {services.map((s, i) => (
+              {sortedServices.map((s, i) => (
                 <tr key={s._id || i}>
                   <td className="hidden sm:table-cell">{i + 1}</td>
                   <td>
@@ -149,7 +196,7 @@ const MyBookings = () => {
                       <div>
                         <div className="font-bold">{s.userName}</div>
                         <div className="text-sm opacity-50">
-                          Services States
+                          {s.deliveryStatus}
                         </div>
                       </div>
                     </div>
@@ -196,7 +243,7 @@ const MyBookings = () => {
         </div>
       </div>
 
-      {/* Edit Modal */}
+      {/* Modal */}
       {isOpen && (
         <div className="modal modal-open">
           <div className="modal-box max-w-lg">

@@ -28,6 +28,8 @@ import EarningSummary from "../Pages/DecoratorPage/Earning Summary/EarningSummar
 
 import AboutUsPage from "../Pages/AboutUs/AboutPage";
 import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
+import ContactPage from "../Pages/Contact/ContactUsPage";
+import CoveragePage from "../Pages/Landing/Map/CoveragePage";
 // import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 
 export const router = createBrowserRouter([
@@ -45,6 +47,14 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUsPage></AboutUsPage>,
+      },
+      {
+        path: "/contact",
+        element: <ContactPage></ContactPage>,
+      },
+      {
+        path: "/coverage",
+        element: <CoveragePage></CoveragePage>,
       },
     ],
   },

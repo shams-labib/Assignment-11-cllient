@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const CreateDecoratorForm = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,11 @@ const CreateDecoratorForm = () => {
     axiosSecure
       .post(`/users?email=${data?.email}`, decorInfo)
       .then(() => {
-        console.log("data added success");
+        Swal.fire({
+          title: "Decorator created success",
+          text: "Data added to the website",
+          icon: "success",
+        });
       })
       .catch((err) => {
         console.log(err);
