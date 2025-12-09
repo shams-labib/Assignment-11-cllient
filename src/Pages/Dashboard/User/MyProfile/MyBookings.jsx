@@ -16,12 +16,19 @@ const MyBookings = () => {
   const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState("desc");
 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 5; // items per page
+
   const { isLoading, isError } = useQuery({
-    queryKey: ["bookings"],
+    queryKey: ["bookings", page],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/bookings?email=${user?.email}`);
-      setServices(res.data);
-      return res.data;
+      const res = await axiosSecure.get(
+        `/bookings?email=${user?.email}&page=${page}&limit=${limit}`
+      );
+      setServices(res.data.data);
+      setTotalPages(res.data.totalPages);
+      return res.data.data;
     },
   });
 
@@ -241,6 +248,37 @@ const MyBookings = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-3 mt-4">
+        <button
+          className={`px-4 py-2 rounded-md border cursor-pointer ${
+            page === 1
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+          disabled={page === 1}
+          onClick={() => setPage((prev) => prev - 1)}
+        >
+          Previous
+        </button>
+
+        <span className="px-4 py-2 rounded-md border bg-gray-100 text-gray-700">
+          Page {page} of {totalPages}
+        </span>
+
+        <button
+          className={`px-4 py-2 rounded-md border cursor-pointer ${
+            page === totalPages
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              : "bg-white text-gray-700 hover:bg-gray-100"
+          }`}
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
+        >
+          Next
+        </button>
       </div>
 
       {/* Modal */}
