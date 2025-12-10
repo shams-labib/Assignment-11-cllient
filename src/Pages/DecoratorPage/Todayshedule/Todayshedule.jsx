@@ -30,7 +30,7 @@ const Todayshedule = () => {
 
   return (
     <div>
-      <h2 className="text-4xl font-semibold mb-6">
+      <h2 className="md:text-4xl text-3xl text-center font-semibold mb-6">
         Today's Schedule : {filteredParcels.length}
       </h2>
 

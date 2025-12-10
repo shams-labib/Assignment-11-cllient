@@ -32,6 +32,7 @@ import ContactPage from "../Pages/Contact/ContactUsPage";
 import CoveragePage from "../Pages/Landing/Map/CoveragePage";
 import DecoratorRoute from "./RiderRoute";
 import AdminRoute from "./AdminRoute";
+import DashboardHome from "../Pages/DashboardHome/DashboardHome";
 // import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 
 export const router = createBrowserRouter([
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
       // User Path
       {
         path: "my-bookings",

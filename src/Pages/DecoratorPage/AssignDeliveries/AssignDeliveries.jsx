@@ -43,9 +43,9 @@ const AssignDeliveries = () => {
   return (
     <div className="p-4">
       {/* Title */}
-      <div className="flex justify-center items-center gap-3 mb-6">
+      <div className="flex justify-center md:items-center gap-3 mb-6">
         <Boxes className="w-10 h-10 text-blue-600" />
-        <h2 className="text-4xl font-bold text-center">
+        <h2 className="md:text-4xl text-3xl font-bold text-center">
           Assigned Parcels ({parcels.length})
         </h2>
       </div>

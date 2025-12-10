@@ -47,7 +47,7 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <CustomNavLink to="/">
+        <CustomNavLink to="/" onClick={() => setDrawerOpen(false)}>
           <motion.div
             className="flex items-center gap-2"
             whileHover={{ x: 4 }}
@@ -60,7 +60,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <CustomNavLink to="/services">
+        <CustomNavLink to="/services" onClick={() => setDrawerOpen(false)}>
           <motion.div
             className="flex items-center gap-2"
             whileHover={{ scale: 1.08 }}
@@ -73,7 +73,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <CustomNavLink to="/about">
+        <CustomNavLink to="/about" onClick={() => setDrawerOpen(false)}>
           <motion.div
             className="flex items-center gap-2"
             whileHover={{ rotate: 3 }}
@@ -86,7 +86,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <CustomNavLink to="/contact">
+        <CustomNavLink to="/contact" onClick={() => setDrawerOpen(false)}>
           <motion.div
             className="flex items-center gap-2"
             whileHover={{ y: -3 }}

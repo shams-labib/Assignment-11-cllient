@@ -68,10 +68,10 @@ const DashboardLayout = () => {
           "
         >
           {/* LOGO */}
-          <div className="flex flex-col items-center py-6 border-b border-white/20">
+          <div className="flex flex-col  items-center  md:mt-0 py-6 mt-22 border-b border-white/20">
             <img
               src={logoImg}
-              className="w-20 rounded-full shadow-lg"
+              className="md:w-20 w-10 rounded-full shadow-lg"
               alt="Logo"
             />
             <h2 className="text-lg font-bold text-gray-700 dark:text-gray-300 mt-2">
@@ -80,7 +80,7 @@ const DashboardLayout = () => {
           </div>
 
           {/* MENU */}
-          <ul className="menu px-4 py-4 space-y-1 text-gray-700 dark:text-gray-300 font-medium">
+          <ul className="menu px-4 py-4 space-y-3 text-gray-700 dark:text-gray-300 font-medium ">
             <SidebarItem
               to="/"
               icon={<AiOutlineHome size={22} />}
@@ -200,10 +200,16 @@ const DashboardLayout = () => {
 
 /* COMPONENT: Sidebar Item */
 const SidebarItem = ({ to, icon, text }) => {
+  const handleCloseDrawer = () => {
+    const checkbox = document.getElementById("my-drawer-4");
+    if (checkbox) checkbox.checked = false;
+  };
+
   return (
     <li>
       <NavLink
         to={to}
+        onClick={handleCloseDrawer}
         className={({ isActive }) =>
           `
           flex items-center gap-3 px-4 py-2 rounded-lg
