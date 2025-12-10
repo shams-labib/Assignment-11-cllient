@@ -30,6 +30,8 @@ import AboutUsPage from "../Pages/AboutUs/AboutPage";
 import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 import ContactPage from "../Pages/Contact/ContactUsPage";
 import CoveragePage from "../Pages/Landing/Map/CoveragePage";
+import DecoratorRoute from "./RiderRoute";
+import AdminRoute from "./AdminRoute";
 // import AdminDashboardHome from "../Pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 
 export const router = createBrowserRouter([
@@ -76,26 +78,6 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      {
-        path: "create-decorator",
-        Component: CreateDecoratorForm,
-      },
-      {
-        path: "decorator-list",
-        Component: DecoratorList,
-      },
-      {
-        path: "all-users",
-        Component: AllUsers,
-      },
-      {
-        path: "create-services",
-        Component: CreateService,
-      },
-      {
-        path: "services-list",
-        Component: ServicesDashboardComponent,
-      },
       // User Path
       {
         path: "my-bookings",
@@ -105,11 +87,89 @@ export const router = createBrowserRouter([
       { path: "payment-success", Component: PaymentSuccess },
       { path: "payment-cancelled", Component: PaymentCancel },
       { path: "payment-history", Component: PaymentHistory },
-      { path: "manage-bookings", Component: ManageBookings },
-      { path: "assigned-deliveries", Component: AssignDeliveries },
-      { path: "today-shedule", Component: Todayshedule },
-      { path: "earings-summary", Component: EarningSummary },
-      { path: "admin-dashboard", Component: AdminDashboardHome },
+
+      // Decorator panel
+      {
+        path: "assigned-deliveries",
+        element: (
+          <DecoratorRoute>
+            <AssignDeliveries></AssignDeliveries>
+          </DecoratorRoute>
+        ),
+      },
+      {
+        path: "today-shedule",
+        element: (
+          <DecoratorRoute>
+            <Todayshedule></Todayshedule>
+          </DecoratorRoute>
+        ),
+      },
+      {
+        path: "earings-summary",
+        element: (
+          <DecoratorRoute>
+            <EarningSummary></EarningSummary>
+          </DecoratorRoute>
+        ),
+      },
+      // Admin panel
+      {
+        path: "admin-dashboard",
+        element: (
+          <AdminRoute>
+            <AdminDashboardHome></AdminDashboardHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-bookings",
+        element: (
+          <AdminRoute>
+            <ManageBookings></ManageBookings>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "create-decorator",
+        element: (
+          <AdminRoute>
+            <CreateDecoratorForm></CreateDecoratorForm>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "decorator-list",
+        element: (
+          <AdminRoute>
+            <DecoratorList></DecoratorList>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "all-users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "create-services",
+        element: (
+          <AdminRoute>
+            <CreateService></CreateService>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "services-list",
+        element: (
+          <AdminRoute>
+            <ServicesDashboardComponent></ServicesDashboardComponent>
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);
