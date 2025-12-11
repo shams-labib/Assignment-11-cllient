@@ -176,6 +176,4 @@ StyleDecor aims to modernize the decoration industry by solving:
 
 ---
 
-## 📁 Project Structure
 
-### **Client (`src/`)**
